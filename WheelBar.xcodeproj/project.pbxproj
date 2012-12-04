@@ -1,0 +1,272 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC767083166BB6F7006115B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC767082166BB6F7006115B7 /* Foundation.framework */; };
+		DC767092166BB710006115B7 /* PXLWheelBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC767091166BB710006115B7 /* PXLWheelBarController.m */; };
+		DC767097166BB818006115B7 /* PXLWheelBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC767096166BB818006115B7 /* PXLWheelBar.m */; };
+		DC767117166BE74C006115B7 /* PXLWheelBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = DC767090166BB710006115B7 /* PXLWheelBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC767118166BE74C006115B7 /* PXLWheelBar.h in Headers */ = {isa = PBXBuildFile; fileRef = DC767093166BB720006115B7 /* PXLWheelBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DC76707F166BB6F7006115B7 /* libWheelBar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWheelBar.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC767082166BB6F7006115B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DC767086166BB6F7006115B7 /* WheelBar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WheelBar-Prefix.pch"; sourceTree = "<group>"; };
+		DC767090166BB710006115B7 /* PXLWheelBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLWheelBarController.h; sourceTree = "<group>"; };
+		DC767091166BB710006115B7 /* PXLWheelBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLWheelBarController.m; sourceTree = "<group>"; };
+		DC767093166BB720006115B7 /* PXLWheelBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLWheelBar.h; sourceTree = "<group>"; };
+		DC767096166BB818006115B7 /* PXLWheelBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLWheelBar.m; sourceTree = "<group>"; };
+		DC7670D8166BDB38006115B7 /* menu-bar-selection-indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-selection-indicator.png"; sourceTree = "<group>"; };
+		DC7670D9166BDB38006115B7 /* menu-bar-selection-indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-selection-indicator@2x.png"; sourceTree = "<group>"; };
+		DC7670DA166BDB38006115B7 /* menu-bar-separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-separator.png"; sourceTree = "<group>"; };
+		DC7670DB166BDB38006115B7 /* menu-bar-separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-separator@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC76707C166BB6F7006115B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC767083166BB6F7006115B7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC767074166BB6F7006115B7 = {
+			isa = PBXGroup;
+			children = (
+				DC767084166BB6F7006115B7 /* WheelBar */,
+				DC767081166BB6F7006115B7 /* Frameworks */,
+				DC767080166BB6F7006115B7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC767080166BB6F7006115B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC76707F166BB6F7006115B7 /* libWheelBar.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC767081166BB6F7006115B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC767082166BB6F7006115B7 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC767084166BB6F7006115B7 /* WheelBar */ = {
+			isa = PBXGroup;
+			children = (
+				DC767090166BB710006115B7 /* PXLWheelBarController.h */,
+				DC767091166BB710006115B7 /* PXLWheelBarController.m */,
+				DC767093166BB720006115B7 /* PXLWheelBar.h */,
+				DC767096166BB818006115B7 /* PXLWheelBar.m */,
+				DC767085166BB6F7006115B7 /* Supporting Files */,
+			);
+			path = WheelBar;
+			sourceTree = "<group>";
+		};
+		DC767085166BB6F7006115B7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC7670D8166BDB38006115B7 /* menu-bar-selection-indicator.png */,
+				DC7670D9166BDB38006115B7 /* menu-bar-selection-indicator@2x.png */,
+				DC7670DA166BDB38006115B7 /* menu-bar-separator.png */,
+				DC7670DB166BDB38006115B7 /* menu-bar-separator@2x.png */,
+				DC767086166BB6F7006115B7 /* WheelBar-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DC767116166BE73E006115B7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC767117166BE74C006115B7 /* PXLWheelBarController.h in Headers */,
+				DC767118166BE74C006115B7 /* PXLWheelBar.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DC76707E166BB6F7006115B7 /* WheelBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC76708D166BB6F7006115B7 /* Build configuration list for PBXNativeTarget "WheelBar" */;
+			buildPhases = (
+				DC76707B166BB6F7006115B7 /* Sources */,
+				DC76707C166BB6F7006115B7 /* Frameworks */,
+				DC767116166BE73E006115B7 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WheelBar;
+			productName = WheelBar;
+			productReference = DC76707F166BB6F7006115B7 /* libWheelBar.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC767076166BB6F7006115B7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = pixel4;
+			};
+			buildConfigurationList = DC767079166BB6F7006115B7 /* Build configuration list for PBXProject "WheelBar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DC767074166BB6F7006115B7;
+			productRefGroup = DC767080166BB6F7006115B7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC76707E166BB6F7006115B7 /* WheelBar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC76707B166BB6F7006115B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC767092166BB710006115B7 /* PXLWheelBarController.m in Sources */,
+				DC767097166BB818006115B7 /* PXLWheelBar.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DC76708B166BB6F7006115B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					i386,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DC76708C166BB6F7006115B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					i386,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC76708E166BB6F7006115B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/WheelBar.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WheelBar/WheelBar-Prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DC76708F166BB6F7006115B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/WheelBar.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WheelBar/WheelBar-Prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC767079166BB6F7006115B7 /* Build configuration list for PBXProject "WheelBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC76708B166BB6F7006115B7 /* Debug */,
+				DC76708C166BB6F7006115B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC76708D166BB6F7006115B7 /* Build configuration list for PBXNativeTarget "WheelBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC76708E166BB6F7006115B7 /* Debug */,
+				DC76708F166BB6F7006115B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC767076166BB6F7006115B7 /* Project object */;
+}
