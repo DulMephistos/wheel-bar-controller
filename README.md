@@ -55,6 +55,10 @@ Using it to customize some attributes would be like:
 ![Simple](http://pixel4.co/wheel-bar-controller/simple.png)
 ![Customized](http://pixel4.co/wheel-bar-controller/simple.png)
 
+### Details
+
+Deployed to iOS 5.0+ and it's ARC enabled.
+
 ## Contact
 
 Fabio Teles
