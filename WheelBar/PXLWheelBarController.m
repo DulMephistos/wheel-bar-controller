@@ -20,15 +20,20 @@
 
 @implementation PXLWheelBarController
 
+- (id)initWithWheelBarClass:(Class)wheelBarClass
+{
+	self = [super init];
+	if (self) {
+		_wheelBarClass = wheelBarClass;
+	}
+	return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
 	_selectedIndex = NSNotFound;
-	
-	_wheelBarFont = [UIFont boldSystemFontOfSize:15.0f];
-	_wheelBarColor = [UIColor whiteColor];
-	_wheelBarHighlightedColor = [UIColor grayColor];
 	
 	[self setContainerView:[[UIView alloc] initWithFrame:self.view.bounds]];
 	[self.containerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -37,10 +42,6 @@
 
 - (void)viewDidUnload
 {
-	_wheelBarFont = nil;
-	_wheelBarColor = nil;
-	_wheelBarHighlightedColor = nil;
-	
 	[self setViewControllers:nil];
 	
 	[self.containerView removeFromSuperview];
@@ -141,22 +142,26 @@
 		_viewControllers = [NSArray arrayWithArray:tempViewControllers];
 		
 		//create wheel bar
-		[self setWheelBar:[[PXLWheelBar alloc] initWithFont:_wheelBarFont
-											 color:_wheelBarColor
-								  highlightedColor:_wheelBarHighlightedColor
-											titles:titles]];
+		PXLWheelBar *wheelBar = nil;
+		if (_wheelBarClass != NULL && [_wheelBarClass isSubclassOfClass:[PXLWheelBar class]]) {
+			wheelBar = [[_wheelBarClass alloc] init];
+		} else {
+			wheelBar = [[PXLWheelBar alloc] init];
+		}
 		
 		CGRect wheelBarFrame = CGRectZero;
-		wheelBarFrame.size = [self.wheelBar sizeThatFits:CGSizeZero];
+		wheelBarFrame.size = [wheelBar sizeThatFits:CGSizeZero];
 		
-		[self.wheelBar setFrame:wheelBarFrame];
-		[self.wheelBar setDelegate:self];
+		[wheelBar setFrame:wheelBarFrame];
+		[wheelBar setDelegate:self];
+		[wheelBar setTitles:titles];
+		[self setWheelBar:wheelBar];
 		
 		CGRect containerViewFrame = self.view.bounds;
-		containerViewFrame.origin.y = self.wheelBar.bounds.size.height;
-		containerViewFrame.size.height -= self.wheelBar.bounds.size.height;
+		containerViewFrame.origin.y = wheelBarFrame.size.height;
+		containerViewFrame.size.height -= wheelBarFrame.size.height;
+		
 		[self.containerView setFrame:containerViewFrame];
-
 		[self.view addSubview:self.wheelBar];
 	} else {
 		
@@ -255,17 +260,6 @@
 	
 	if ([self.delegate respondsToSelector:@selector(wheelBarController:shouldSelectViewController:)]) {
 		[self.delegate wheelBarController:self didSelectViewController:_selectedViewController];
-	}
-}
-
-- (void)setWheelBarFont:(UIFont *)font color:(UIColor *)color highlightedColor:(UIColor *)highlightedColor
-{
-	_wheelBarFont = font;
-	_wheelBarColor = color;
-	_wheelBarHighlightedColor = highlightedColor;
-	
-	if (self.wheelBar) {
-		[self.wheelBar customizeFont:_wheelBarFont color:_wheelBarColor highlightedColor:_wheelBarHighlightedColor];
 	}
 }
 

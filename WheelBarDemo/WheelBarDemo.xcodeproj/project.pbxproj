@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC0DE5F8166EC05700BCC374 /* wheelBar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0DE5F6166EC05600BCC374 /* wheelBar-background.png */; };
+		DC0DE5F9166EC05700BCC374 /* wheelBar-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0DE5F7166EC05600BCC374 /* wheelBar-background@2x.png */; };
+		DC0DE5FC166EC0D700BCC374 /* wheelBar-bullet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0DE5FA166EC0D700BCC374 /* wheelBar-bullet@2x.png */; };
+		DC0DE5FD166EC0D700BCC374 /* wheelBar-bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = DC0DE5FB166EC0D700BCC374 /* wheelBar-bullet.png */; };
+		DC0DE601166ECEDA00BCC374 /* Demo2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0DE600166ECEDA00BCC374 /* Demo2ViewController.m */; };
+		DC0DE604166ED56D00BCC374 /* CustomWheelBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0DE603166ED56D00BCC374 /* CustomWheelBar.m */; };
 		DC7671B4166E7087006115B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7671B3166E7087006115B7 /* UIKit.framework */; };
 		DC7671B6166E7087006115B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7671B5166E7087006115B7 /* Foundation.framework */; };
 		DC7671B8166E7087006115B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7671B7166E7087006115B7 /* CoreGraphics.framework */; };
@@ -18,10 +24,19 @@
 		DC7671CA166E7087006115B7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC7671C9166E7087006115B7 /* Default-568h@2x.png */; };
 		DC7671D1166E718A006115B7 /* libWheelBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7671D0166E718A006115B7 /* libWheelBar.a */; };
 		DC7671D6166E7432006115B7 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7671D4166E7432006115B7 /* DemoViewController.m */; };
-		DC7671D7166E7432006115B7 /* DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7671D5166E7432006115B7 /* DemoViewController.xib */; };
+		DC7671FC166EB896006115B7 /* wheelBar-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = DC7671F8166EB896006115B7 /* wheelBar-divider.png */; };
+		DC7671FD166EB896006115B7 /* wheelBar-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC7671F9166EB896006115B7 /* wheelBar-divider@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC0DE5F6166EC05600BCC374 /* wheelBar-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheelBar-background.png"; sourceTree = "<group>"; };
+		DC0DE5F7166EC05600BCC374 /* wheelBar-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheelBar-background@2x.png"; sourceTree = "<group>"; };
+		DC0DE5FA166EC0D700BCC374 /* wheelBar-bullet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheelBar-bullet@2x.png"; sourceTree = "<group>"; };
+		DC0DE5FB166EC0D700BCC374 /* wheelBar-bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheelBar-bullet.png"; sourceTree = "<group>"; };
+		DC0DE5FF166ECEDA00BCC374 /* Demo2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo2ViewController.h; sourceTree = "<group>"; };
+		DC0DE600166ECEDA00BCC374 /* Demo2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo2ViewController.m; sourceTree = "<group>"; };
+		DC0DE602166ED56D00BCC374 /* CustomWheelBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomWheelBar.h; sourceTree = "<group>"; };
+		DC0DE603166ED56D00BCC374 /* CustomWheelBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomWheelBar.m; sourceTree = "<group>"; };
 		DC7671AF166E7087006115B7 /* WheelBarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WheelBarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC7671B3166E7087006115B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DC7671B5166E7087006115B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -35,10 +50,11 @@
 		DC7671C5166E7087006115B7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DC7671C7166E7087006115B7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DC7671C9166E7087006115B7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		DC7671D0166E718A006115B7 /* libWheelBar.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libWheelBar.a; path = "../build/Release-iphoneos/libWheelBar.a"; sourceTree = "<group>"; };
+		DC7671D0166E718A006115B7 /* libWheelBar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWheelBar.a; path = "../build/Release-iphoneos/libWheelBar.a"; sourceTree = "<group>"; };
 		DC7671D3166E7432006115B7 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		DC7671D4166E7432006115B7 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
-		DC7671D5166E7432006115B7 /* DemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoViewController.xib; sourceTree = "<group>"; };
+		DC7671F8166EB896006115B7 /* wheelBar-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheelBar-divider.png"; sourceTree = "<group>"; };
+		DC7671F9166EB896006115B7 /* wheelBar-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheelBar-divider@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +72,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC0DE5FE166EC0E700BCC374 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DC7671F8166EB896006115B7 /* wheelBar-divider.png */,
+				DC7671F9166EB896006115B7 /* wheelBar-divider@2x.png */,
+				DC0DE5F6166EC05600BCC374 /* wheelBar-background.png */,
+				DC0DE5F7166EC05600BCC374 /* wheelBar-background@2x.png */,
+				DC0DE5FA166EC0D700BCC374 /* wheelBar-bullet@2x.png */,
+				DC0DE5FB166EC0D700BCC374 /* wheelBar-bullet.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		DC7671A4166E7087006115B7 = {
 			isa = PBXGroup;
 			children = (
@@ -91,7 +120,11 @@
 				DC7671C3166E7087006115B7 /* AppDelegate.m */,
 				DC7671D3166E7432006115B7 /* DemoViewController.h */,
 				DC7671D4166E7432006115B7 /* DemoViewController.m */,
-				DC7671D5166E7432006115B7 /* DemoViewController.xib */,
+				DC0DE5FF166ECEDA00BCC374 /* Demo2ViewController.h */,
+				DC0DE600166ECEDA00BCC374 /* Demo2ViewController.m */,
+				DC0DE602166ED56D00BCC374 /* CustomWheelBar.h */,
+				DC0DE603166ED56D00BCC374 /* CustomWheelBar.m */,
+				DC0DE5FE166EC0E700BCC374 /* Images */,
 				DC7671BA166E7087006115B7 /* Supporting Files */,
 			);
 			path = WheelBarDemo;
@@ -166,7 +199,12 @@
 				DC7671C6166E7087006115B7 /* Default.png in Resources */,
 				DC7671C8166E7087006115B7 /* Default@2x.png in Resources */,
 				DC7671CA166E7087006115B7 /* Default-568h@2x.png in Resources */,
-				DC7671D7166E7432006115B7 /* DemoViewController.xib in Resources */,
+				DC7671FC166EB896006115B7 /* wheelBar-divider.png in Resources */,
+				DC7671FD166EB896006115B7 /* wheelBar-divider@2x.png in Resources */,
+				DC0DE5F8166EC05700BCC374 /* wheelBar-background.png in Resources */,
+				DC0DE5F9166EC05700BCC374 /* wheelBar-background@2x.png in Resources */,
+				DC0DE5FC166EC0D700BCC374 /* wheelBar-bullet@2x.png in Resources */,
+				DC0DE5FD166EC0D700BCC374 /* wheelBar-bullet.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +218,8 @@
 				DC7671C0166E7087006115B7 /* main.m in Sources */,
 				DC7671C4166E7087006115B7 /* AppDelegate.m in Sources */,
 				DC7671D6166E7432006115B7 /* DemoViewController.m in Sources */,
+				DC0DE601166ECEDA00BCC374 /* Demo2ViewController.m in Sources */,
+				DC0DE604166ED56D00BCC374 /* CustomWheelBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +330,7 @@
 				DC7671CF166E7087006115B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -22,10 +22,6 @@
 		DC767091166BB710006115B7 /* PXLWheelBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLWheelBarController.m; sourceTree = "<group>"; };
 		DC767093166BB720006115B7 /* PXLWheelBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLWheelBar.h; sourceTree = "<group>"; };
 		DC767096166BB818006115B7 /* PXLWheelBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLWheelBar.m; sourceTree = "<group>"; };
-		DC7670D8166BDB38006115B7 /* menu-bar-selection-indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-selection-indicator.png"; sourceTree = "<group>"; };
-		DC7670D9166BDB38006115B7 /* menu-bar-selection-indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-selection-indicator@2x.png"; sourceTree = "<group>"; };
-		DC7670DA166BDB38006115B7 /* menu-bar-separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-separator.png"; sourceTree = "<group>"; };
-		DC7670DB166BDB38006115B7 /* menu-bar-separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-bar-separator@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,10 +76,6 @@
 		DC767085166BB6F7006115B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DC7670D8166BDB38006115B7 /* menu-bar-selection-indicator.png */,
-				DC7670D9166BDB38006115B7 /* menu-bar-selection-indicator@2x.png */,
-				DC7670DA166BDB38006115B7 /* menu-bar-separator.png */,
-				DC7670DB166BDB38006115B7 /* menu-bar-separator@2x.png */,
 				DC767086166BB6F7006115B7 /* WheelBar-Prefix.pch */,
 			);
 			name = "Supporting Files";

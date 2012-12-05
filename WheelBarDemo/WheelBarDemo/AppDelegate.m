@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "DemoViewController.h"
+#import "Demo2ViewController.h"
+#import "CustomWheelBar.h"
 
 @implementation AppDelegate
 
@@ -18,9 +20,17 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 	
-	DemoViewController *demo = [[DemoViewController alloc] initWithNibName:@"DemoViewController" bundle:nil];
-	[self.window setRootViewController:demo];
-	[self.window addSubview:demo.view];
+	DemoViewController *demo = [[DemoViewController alloc] init];
+	[demo setTitle:@"Simple"];
+	
+	Demo2ViewController *demo2 = [[Demo2ViewController alloc] initWithWheelBarClass:[CustomWheelBar class]];
+	[demo2 setTitle:@"Customized"];
+	
+	UITabBarController *tabBarController = [[UITabBarController alloc] init];
+	[tabBarController setViewControllers:@[demo, demo2]];
+	
+	[self.window setRootViewController:tabBarController];
+	[self.window addSubview:tabBarController.view];
     return YES;
 }
 

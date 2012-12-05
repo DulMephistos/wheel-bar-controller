@@ -22,9 +22,9 @@
 	UIViewController *v2 = [[UIViewController alloc] init];
 	UIViewController *v3 = [[UIViewController alloc] init];
 	
-	[v1 setTitle:@"Test"];
-	[v2 setTitle:@"Test2"];
-	[v3 setTitle:@"Bazinga"];
+	[v1 setTitle:@"Books"];
+	[v2 setTitle:@"Entertainment"];
+	[v3 setTitle:@"Medical"];
 	
 	[v1.view setBackgroundColor:[UIColor redColor]];
 	[v2.view setBackgroundColor:[UIColor blueColor]];
@@ -32,6 +32,7 @@
 	
 	[self setViewControllers:@[v1, v2, v3]];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -13,52 +13,75 @@
 #define kPXLWheelBarDefaultHeight 42.f
 
 @interface PXLWheelBar () {
-	CGFloat _selectionIndicatorOffset;
 	NSUInteger _markedIndex;
 }
 
 @property (strong, nonatomic) NSMutableArray *labels;
 @property (strong, nonatomic) NSMutableArray *middles;
-@property (strong, nonatomic) UIView *bottomBar;
-@property (strong, nonatomic) UIImageView *selectionIndicator;
+@property (strong, nonatomic) UIImageView *backgroundImageView;
+@property (strong, nonatomic) UIImageView *selectionIndicatorView;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (assign, nonatomic) CGFloat position;
 
 - (void)scrollViewDoPaging;
 - (void)moveToCurrentIndex;
+- (void)redraw;
 
 @end
 
 @implementation PXLWheelBar
 
+@synthesize delegate = _delegate;
+@synthesize titles = _titles;
+@synthesize position = _position;
+
+@synthesize selectedIndex = _selectedIndex;
+@synthesize titlesFont = _titlesFont;
+@synthesize titlesColor = _titlesColor;
+@synthesize titlesHighlightedColor = _titlesHighlightedColor;
+@synthesize titlesShadowColor = _titlesShadowColor;
+@synthesize titlesVerticalOffset = _titlesVerticalOffset;
+@synthesize dividerImage = _dividerImage;
+@synthesize selectionIndicatorImage = _selectionIndicatorImage;
+@synthesize selectionIndicatorOffset = _selectionIndicatorOffset;
+@synthesize backgroundImage = _backgroundImage;
+
+@synthesize labels = _labels;
+@synthesize middles = _middles;
+@synthesize backgroundImageView = _backgroundImageView;
+@synthesize selectionIndicatorView = _selectionIndicatorView;
+@synthesize scrollView = _scrollView;
+
+
 #pragma mark - Initializers
-- (id)initWithFont:(UIFont *)font color:(UIColor *)color highlightedColor:(UIColor *)highlightedColor titles:(NSArray *)titles
+- (id)initWithTitles:(NSArray *)titles
 {
-	self = [super initWithFrame:CGRectZero];
+	self = [self initWithFrame:CGRectZero];
 	if (self) {
-		_font = font;
-		_color = color;
-		_highlightedColor = highlightedColor;
-		_selectedIndex = NSNotFound;
-		_markedIndex = NSNotFound;
-		
 		[self setTitles:[titles mutableCopy]];
-		
-		UITapGestureRecognizer *labelTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-		[self addGestureRecognizer:labelTapGesture];
-		
-		[self setBackgroundColor:[UIColor blackColor]];
-		[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin];
 	}
-	
 	return self;
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [self initWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] color:[UIColor blackColor] highlightedColor:[UIColor whiteColor] titles:nil];
+	self = [super initWithFrame:frame];
     if (self) {
-        self.frame = frame;
+		
+		_titlesFont = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
+		_titlesColor = [UIColor lightGrayColor];
+		_titlesHighlightedColor = [UIColor whiteColor];
+		_titlesShadowColor = [UIColor colorWithWhite:.5f alpha:.7f];;
+		_selectionIndicatorOffset = UIOffsetZero;
+		_titlesVerticalOffset = 0.f;
+				
+		_selectedIndex = NSNotFound;
+		_markedIndex = NSNotFound;
+		
+		UITapGestureRecognizer *labelTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+		[self addGestureRecognizer:labelTapGesture];
+		
+		[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin];
     }
     return self;
 }
@@ -70,10 +93,12 @@
 	if (self.labels.count > 0) {
 		UILabel *lbl = (UILabel *)[self.labels objectAtIndex:0];
 		CGFloat leftSpace = self.scrollView.frame.size.width * .5f - lbl.frame.size.width * .5f;
+		
 		lbl = (UILabel *)[self.labels lastObject];
 		CGFloat rightSpace = self.scrollView.frame.size.width * .5f - lbl.frame.size.width * .5f;
-		self.scrollView.contentInset = UIEdgeInsetsMake(0.f, leftSpace, 0.f, rightSpace);
-		self.scrollView.contentOffset = CGPointMake(-leftSpace, 0.f);
+		
+		[self.scrollView setContentInset:UIEdgeInsetsMake(0.f, leftSpace, 0.f, rightSpace)];
+		[self.scrollView setContentOffset:CGPointMake(-leftSpace, 0.f)];
 	}
 	
 	[self moveToCurrentIndex];
@@ -81,12 +106,51 @@
 
 - (void)setFrame:(CGRect)frame
 {
-	BOOL shouldRedraw = (self.frame.size.height < 14.f && frame.size.height >= 14.f) ||
-						(self.frame.size.height >= 14.f && frame.size.height < 14.f);
+	BOOL shouldRedraw = NO;
+	if (self.dividerImage) {
+		CGFloat dividerHeight = self.dividerImage.size.height;
+		CGFloat currentHeight = self.bounds.size.height;
+		shouldRedraw = (frame.size.height < dividerHeight || (currentHeight < dividerHeight && frame.size.height >= dividerHeight));
+	}
+	
 	[super setFrame:frame];
 	
-	if (shouldRedraw)
+	if (shouldRedraw) {
 		[self redraw];
+	}
+}
+
+- (void)drawRect:(CGRect)rect
+{
+	if (self.backgroundImage || self.backgroundColor) {
+		[super drawRect:rect];
+	} else {
+		
+		CGContextRef ctx = UIGraphicsGetCurrentContext();
+		
+		// Draw default gradient
+		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+		CGFloat locations[] = {0.f, .2f, .5f, .8f, 1.f};
+		CGColorRef blackColor = [[UIColor blackColor] CGColor];
+		CGColorRef darkGrayColor = [[UIColor colorWithWhite:0.33f alpha:1.f] CGColor];
+		CGColorRef lightGrayColor = [[UIColor colorWithWhite:0.51f alpha:1.f] CGColor];
+		CFArrayRef colors = (__bridge CFArrayRef)@[(__bridge id)blackColor, (__bridge id)darkGrayColor, (__bridge id)lightGrayColor, (__bridge id)darkGrayColor, (__bridge id)blackColor];
+		
+		CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, colors, locations);
+		CGContextDrawLinearGradient(ctx, gradient, CGPointZero, CGPointMake(self.bounds.size.width, 0), 0);
+		CGGradientRelease(gradient);
+		
+		// Draw top shadow
+		CGFloat topLocations[] = {0.f, 1.f};
+		colors = (__bridge CFArrayRef)@[(__bridge id)blackColor, (__bridge id)[[UIColor colorWithWhite:0.f alpha:0.f] CGColor]];
+		gradient = CGGradientCreateWithColors(colorSpace, colors, topLocations);
+		CGContextDrawLinearGradient(ctx, gradient, CGPointZero, CGPointMake(0, 3.f), 0);
+		CGGradientRelease(gradient);
+		
+		// Draw bottom line
+		[[UIColor colorWithWhite:1.f alpha:.25f] set];
+		CGContextFillRect(ctx, CGRectMake(rect.origin.x, rect.origin.y + rect.size.height - 1.f, rect.size.width, 1.f));
+	}
 }
 
 - (CGSize)sizeThatFits:(CGSize)size
@@ -94,38 +158,115 @@
 	return CGSizeMake((UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ? [UIApplication sharedApplication].statusBarFrame.size.width : [UIApplication sharedApplication].statusBarFrame.size.height), kPXLWheelBarDefaultHeight);
 }
 
-#pragma mark - Properties
-- (UIView *)bottomBar
+#pragma mark - Appearance methods
+- (void)setTitlesFont:(UIFont *)titlesFont
 {
-	if (!_bottomBar) {
-		_bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0.f, self.frame.size.height - 2.f, self.frame.size.width, 2.f)];
-		[_bottomBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
-		[_bottomBar setBackgroundColor:_highlightedColor];
-		[_bottomBar setClipsToBounds:NO];
-		
-		[_bottomBar addSubview:self.selectionIndicator];
-		
-		[_bottomBar.layer setShadowColor:[UIColor darkGrayColor].CGColor];
-		[_bottomBar.layer setShadowOffset:CGSizeZero];
-		[_bottomBar.layer setShadowRadius:6.f];
-		[_bottomBar.layer setShadowOpacity:1.f];
+	if (![_titlesFont isEqual:titlesFont]) {
+		_titlesFont = titlesFont;
+		[self redraw];
 	}
-	
-	return _bottomBar;
 }
 
-- (UIImageView *)selectionIndicator
+- (void)setTitlesColor:(UIColor *)titlesColor
 {
-	if (!_selectionIndicator) {
-		_selectionIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu-bar-selection-indicator.png"]];
-		_selectionIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-		CGRect frame = _selectionIndicator.frame;
-		frame.origin.x = (self.frame.size.width - frame.size.width) * .5f;
-		frame.origin.y = -6.f;
-		_selectionIndicator.frame = frame;
+	if (![_titlesColor isEqual:titlesColor]) {
+		_titlesColor = titlesColor;
+		[self redraw];
+	}
+}
+
+- (void)setTitlesHighlightedColor:(UIColor *)titlesHighlightedColor
+{
+	if (![_titlesHighlightedColor isEqual:titlesHighlightedColor]) {
+		_titlesHighlightedColor = titlesHighlightedColor;
+		[self redraw];
+	}
+}
+
+- (void)setTitlesShadowColor:(UIColor *)titlesShadowColor
+{
+	if (![_titlesShadowColor isEqual:titlesShadowColor]) {
+		_titlesShadowColor = titlesShadowColor;
+		[self redraw];
+	}
+}
+
+- (void)setTitlesVerticalOffset:(CGFloat)titlesVerticalOffset
+{
+	if (!_titlesVerticalOffset != titlesVerticalOffset) {
+		titlesVerticalOffset = _titlesVerticalOffset;
+	}
+	[self redraw];
+}
+
+- (void)setDividerImage:(UIImage *)dividerImage
+{
+	if (![_dividerImage isEqual:dividerImage]) {
+		_dividerImage = dividerImage;
+		[self redraw];
+	}
+}
+
+- (void)setSelectionIndicatorImage:(UIImage *)selectionIndicatorImage
+{
+	if (![_selectionIndicatorImage isEqual:selectionIndicatorImage]) {
+		_selectionIndicatorImage = selectionIndicatorImage;
+		[self redraw];
+	}
+}
+
+- (void)setSelectionIndicatorOffset:(UIOffset)selectionIndicatorOffset
+{
+	if (!UIOffsetEqualToOffset(_selectionIndicatorOffset, selectionIndicatorOffset)) {
+		_selectionIndicatorOffset = selectionIndicatorOffset;
+		
+		if (self.selectionIndicatorImage) {
+			CGRect frame = CGRectMake((self.frame.size.width - self.selectionIndicatorImage.size.width) * .5f + self.selectionIndicatorOffset.horizontal,
+									  frame.origin.y = self.bounds.size.height - self.selectionIndicatorImage.size.height + self.selectionIndicatorOffset.vertical,
+									  self.selectionIndicatorImage.size.width,
+									  self.selectionIndicatorImage.size.height);
+			[self.selectionIndicatorView setFrame:frame];
+		}
+	}
+}
+
+- (void)setBackgroundImage:(UIImage *)backgroundImage
+{
+	if (![_backgroundImage isEqual:backgroundImage]) {
+		_backgroundImage = backgroundImage;
+		
+		if (_backgroundImage == nil) {
+			[_backgroundImageView removeFromSuperview];
+			[self setBackgroundImageView:nil];
+		} else {
+			[self.backgroundImageView setImage:_backgroundImage];
+			[self.backgroundImageView setFrame:self.bounds];
+			[self insertSubview:self.backgroundImageView atIndex:0];
+		}
+		
+		[self setNeedsDisplay];
+	}
+}
+
+#pragma mark - Default Properties
+- (UIImageView *)selectionIndicatorView
+{
+	if (!_selectionIndicatorView) {
+		_selectionIndicatorView = [[UIImageView alloc] init];
+		[_selectionIndicatorView setAutoresizingMask:(UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin)];
 	}
 	
-	return _selectionIndicator;
+	return _selectionIndicatorView;
+}
+
+- (UIImageView *)backgroundImageView
+{
+	if (!_backgroundImageView) {
+		_backgroundImageView = [[UIImageView alloc] init];
+		[_backgroundImageView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
+	}
+	
+	return _backgroundImageView;
 }
 
 - (UIScrollView *)scrollView
@@ -143,24 +284,28 @@
 	return _scrollView;
 }
 
+#pragma mark - PXLWheelBar Logic
 - (void)setTitles:(NSMutableArray *)titles
 {
-	_titles = titles;
+	if (_titles != titles) {
+		_titles = titles;
+			
+		[self redraw];
 		
-	[self redraw];
-	
-	if (_titles == nil)
-		_selectedIndex = NSNotFound;
-	else if (self.selectedIndex == NSNotFound)
-		[self setSelectedIndex:0];
-	else if (self.selectedIndex >= _titles.count)
-		[self setSelectedIndex:_titles.count - 1];
+		if (_titles == nil)
+			_selectedIndex = NSNotFound;
+		else if (self.selectedIndex == NSNotFound)
+			[self setSelectedIndex:0];
+		else if (self.selectedIndex >= _titles.count)
+			[self setSelectedIndex:_titles.count - 1];
+	}
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-	if (selectedIndex >= self.titles.count)
+	if (selectedIndex >= self.titles.count) {
 		[NSException raise:NSRangeException format:@"range invalid for length:%d", self.titles.count];
+	}
 	
 	_selectedIndex = selectedIndex;
 	
@@ -177,20 +322,10 @@
 {
 	if (_delegate != delegate) {
 		_delegate = delegate;
-		if (self.selectedIndex != NSNotFound && [self.delegate respondsToSelector:@selector(wheelBar:didSelectTitleAtIndex:)])
+		if (self.selectedIndex != NSNotFound && [self.delegate respondsToSelector:@selector(wheelBar:didSelectTitleAtIndex:)]) {
 			[self.delegate wheelBar:self didSelectTitleAtIndex:self.selectedIndex];
+		}
 	}
-}
-
-#pragma mark - PXLWheelBar Logic
-- (void)customizeFont:(UIFont *)font color:(UIColor *)color highlightedColor:(UIColor *)highlightedColor
-{
-	_font = font;
-	_color = color;
-	_highlightedColor = highlightedColor;
-	
-	if (self.titles != nil)
-		[self redraw];
 }
 
 - (void)moveToCurrentIndex
@@ -219,33 +354,49 @@
 
 - (void)redraw
 {
-	for (UIView *sub in self.subviews)
-		[sub removeFromSuperview];
+	for (UIView *sub in self.subviews) {
+		if (![sub isEqual:_backgroundImageView]) {
+			[sub removeFromSuperview];
+		}
+	}
 	
 	self.scrollView = nil;
 	self.labels = [NSMutableArray array];
 	self.middles = [NSMutableArray array];
 	
 	[self addSubview:self.scrollView];
-	[self addSubview:self.bottomBar];
+	
+	// selection indicator image
+	if (self.selectionIndicatorImage) {
+		[self.selectionIndicatorView setImage:self.selectionIndicatorImage];
+		CGRect frame = CGRectMake((self.frame.size.width - self.selectionIndicatorImage.size.width) * .5f + self.selectionIndicatorOffset.horizontal,
+								  frame.origin.y = self.bounds.size.height - self.selectionIndicatorImage.size.height + self.selectionIndicatorOffset.vertical,
+								  self.selectionIndicatorImage.size.width,
+								  self.selectionIndicatorImage.size.height);
+		[self.selectionIndicatorView setFrame:frame];
+		[self addSubview:self.selectionIndicatorView];
+	}
 	
 	UILabel *titleLabel = nil;
 	CGFloat length = 0.f;
+	CGFloat height = self.bounds.size.height;
 	CGRect frameHelper;
-	UIImageView *separator;
+	UIImageView *divider;
 	for (int i=0; i<self.titles.count; i++) {
 		titleLabel = [[UILabel alloc] init];
-		titleLabel.text = [self.titles objectAtIndex:i];
-		titleLabel.font = _font;
-		titleLabel.textColor = _color;
-		titleLabel.highlightedTextColor = _highlightedColor;
-		titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+		[titleLabel setText:[self.titles objectAtIndex:i]];
+		[titleLabel setFont:[self titlesFont]];
+		[titleLabel setTextColor:[self titlesColor]];
+		[titleLabel setHighlightedTextColor:[self titlesHighlightedColor]];
+		[titleLabel setShadowColor:[self titlesShadowColor]];
+		[titleLabel setShadowOffset:CGSizeMake(0.f, 1.f)];
+		[titleLabel setBackgroundColor:[UIColor clearColor]];
+		[titleLabel setAutoresizingMask:(UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin)];
 		[titleLabel sizeToFit];
 		
 		frameHelper = titleLabel.frame;
 		frameHelper.origin.x = length;
-		frameHelper.origin.y = (self.frame.size.height - frameHelper.size.height) * .5f;
+		frameHelper.origin.y = (height - frameHelper.size.height) * .5f + self.titlesVerticalOffset;
 		titleLabel.frame = frameHelper;
 		
 		length += frameHelper.size.width;
@@ -253,21 +404,25 @@
 		if (i < self.titles.count - 1) {
 			length += kPXLWheelBarSpacer;
 			
-			if (self.frame.size.height >= 14.f) {
-				separator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu-bar-separator.png"]];
-				frameHelper = separator.frame;
-				frameHelper.origin.x = length;
-				frameHelper.origin.y = 7.f;
-				separator.frame = frameHelper;
-				separator.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
+			if (self.dividerImage) {
+				divider = [[UIImageView alloc] initWithImage:[self dividerImage]];
+				frameHelper = divider.frame;
+				frameHelper.origin.x = length - frameHelper.size.width * .5f;
+				if (frameHelper.size.height > height) {
+					frameHelper.size.height = height;
+				} else {
+					frameHelper.origin.y = (height - frameHelper.size.height) * .5f;
+				}
+				divider.frame = frameHelper;
+				divider.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
 				
 				[self.middles addObject:[NSNumber numberWithFloat:length]];
 				
 				length += kPXLWheelBarSpacer;
-				[self.scrollView addSubview:separator];
+				[self.scrollView addSubview:divider];
 				
 			} else {
-				[self.middles addObject:[NSNumber numberWithFloat:length * .5f]];
+				[self.middles addObject:[NSNumber numberWithFloat:length - kPXLWheelBarSpacer * .5f]];
 			}
 		}
 		

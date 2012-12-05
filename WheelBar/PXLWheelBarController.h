@@ -11,9 +11,8 @@
 
 @protocol PXLWheelBarControllerDelegate;
 @interface PXLWheelBarController : UIViewController <PXLWheelBarDelegate> {
-	UIFont *_wheelBarFont;
-	UIColor *_wheelBarColor;
-	UIColor *_wheelBarHighlightedColor;
+	@package
+	Class _wheelBarClass;
 }
 
 @property (strong, readonly, nonatomic) PXLWheelBar *wheelBar;
@@ -22,7 +21,7 @@
 @property (assign, nonatomic) NSUInteger selectedIndex;
 @property (weak, nonatomic) id<PXLWheelBarControllerDelegate> delegate;
 
-- (void)setWheelBarFont:(UIFont *)font color:(UIColor *)color highlightedColor:(UIColor *)highlightedColor;
+- (id)initWithWheelBarClass:(Class)wheelBarClass;
 - (UIImage *)snapshotOfView:(UIView *)view;
 
 @end

@@ -10,21 +10,26 @@
 
 @protocol PXLWheelBarDelegate;
 @interface PXLWheelBar : UIView <UIScrollViewDelegate> {
-	UIFont *_font;
-	UIColor *_color;
-	UIColor *_highlightedColor;
 	BOOL _animating;
 }
 
 @property (weak, nonatomic) id<PXLWheelBarDelegate> delegate;
+
 @property (strong, nonatomic) NSMutableArray *titles;
-@property (nonatomic, readonly) CGFloat position;
-@property (nonatomic) NSUInteger selectedIndex;
+@property (assign, nonatomic, readonly) CGFloat position;
+@property (assign, nonatomic) NSUInteger selectedIndex;
 
-- (id)initWithFont:(UIFont *)font color:(UIColor *)color highlightedColor:(UIColor *)highlightedColor titles:(NSArray *)titles; // default initializer
+@property (strong, nonatomic) UIFont *titlesFont UI_APPEARANCE_SELECTOR;
+@property (strong, nonatomic) UIColor *titlesColor UI_APPEARANCE_SELECTOR;
+@property (strong, nonatomic) UIColor *titlesHighlightedColor UI_APPEARANCE_SELECTOR;
+@property (strong, nonatomic) UIColor *titlesShadowColor UI_APPEARANCE_SELECTOR;
+@property (assign, nonatomic) CGFloat titlesVerticalOffset UI_APPEARANCE_SELECTOR;
+@property (strong, nonatomic) UIImage *dividerImage UI_APPEARANCE_SELECTOR;
+@property (strong, nonatomic) UIImage *selectionIndicatorImage UI_APPEARANCE_SELECTOR;
+@property (assign, nonatomic) UIOffset selectionIndicatorOffset UI_APPEARANCE_SELECTOR;
+@property (strong, nonatomic) UIImage *backgroundImage UI_APPEARANCE_SELECTOR;
 
-- (void)customizeFont:(UIFont *)font color:(UIColor *)color highlightedColor:(UIColor *)highlightedColor;
-- (void)redraw;
+- (id)initWithTitles:(NSArray *)titles;
 
 @end
 
