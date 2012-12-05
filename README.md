@@ -1,7 +1,7 @@
 wheel-bar-controller
-===
+====================
 
-*Container view controller that simulates the behavior of a wheel to navigate through the view controllers. It's inspired by the Podcast app.*
+**Container view controller that simulates the behavior of a wheel to navigate through the view controllers. It's inspired by the Podcast app.**
 
 ### The Views of Wheel Bar Controller
 
@@ -52,8 +52,7 @@ Using it to customize some attributes would be like:
 
 ### Snapshots
 
-![Simple](http://pixel4.co/wheel-bar-controller/simple.png)
-![Customized](http://pixel4.co/wheel-bar-controller/simple.png)
+![Simple and Customized](http://pixel4.co/wheel-bar-controller/snapshot.png)
 
 ### Details
 
